@@ -1,0 +1,24 @@
+strat
+
+gradualRolloutRandom
+    PARAM percentage > RANDOM
+gradualRolloutSessionId
+gradualRolloutUserId
+
+flexibleRollout
+    NORMALIZED_NUMBER(PARAM groupId) NUM_GTE PARAM
+remoteAddress
+    CONTEXT remote_address IN PARAM IPs
+userWithId
+    CONTEXT user_id IN PARAM userIds
+
+constraint
+
+someValue NUM_LT 12
+currentTime DATE_AFTER 2022-01-29T13:00:00.000Z
+
+gradualRolloutSessionId WITH {"percentage":"0", "groupId": "AB12A"}
+    CONSTRAINED_BY
+        someValue NUM_LT 12
+        OR
+        currentTime DATE_AFTER 2022-01-29T13:00:00.000Z
